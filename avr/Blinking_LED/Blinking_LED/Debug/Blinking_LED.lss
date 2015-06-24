@@ -48,22 +48,27 @@ Disassembly of section .text:
   20:	ef cf       	rjmp	.-34     	; 0x0 <__vectors>
 
 00000022 <main>:
-#include <util/delay.h>
-
-int main(void)
 {
     
-	DDRB =  0b00000101;	// –ежим работы порта: "1"- выход, "0"- вход
-  22:	85 e0       	ldi	r24, 0x05	; 5
+	// Define direction for port pins. "0" - input, "1" - output. Easy to remember! Isn't it?
+	// Button on PB1. LED on PB2, others are output too, except PB5.
+	// PB5 is RESET.
+	DDRB =  0b00011101;
+  22:	8d e1       	ldi	r24, 0x1D	; 29
   24:	87 bb       	out	0x17, r24	; 23
-	PORTB = 0b11111010;	// ¬ключение подт€гивающих резисторов или состо€ние выхода "1"- включен, "0"- выключен
-  26:	8a ef       	ldi	r24, 0xFA	; 250
+	
+	// Define pullups resistors to "VCC" or output logic states of pins. 
+	// Input "1" - pullup enable, "0" - pullup disable.
+	// Output "1" - logic one, "0" - logic zero.
+	// PB1, PB5 pullup enable.
+	PORTB = 0b00000010;	
+  26:	82 e0       	ldi	r24, 0x02	; 2
   28:	88 bb       	out	0x18, r24	; 24
-		//_delay_ms (500);	// ∆дем 500 милисекудн
-		//PORTB |= (1<<PB0);
-		//PORTB &=~(1<<PB2);
-		//_delay_ms (500);
+	
+	while(1)
+    {
 		
+		// Toggle bit! LED ON/OFF.
 		PORTB ^= (1<<PB2);
   2a:	94 e0       	ldi	r25, 0x04	; 4
   2c:	88 b3       	in	r24, 0x18	; 24
