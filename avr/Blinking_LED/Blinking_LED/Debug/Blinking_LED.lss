@@ -51,7 +51,7 @@ Disassembly of section .text:
 {
     
 	// Define direction for port pins. "0" - input, "1" - output. Easy to remember! Isn't it?
-	// Button on PB1. LED on PB2, others are output too, except PB5.
+	// Button is on PB1. LED attached to PB2, others are output too, except PB5.
 	// PB5 is RESET.
 	DDRB =  0b00011101;
   22:	8d e1       	ldi	r24, 0x1D	; 29
@@ -61,8 +61,8 @@ Disassembly of section .text:
 	// Input "1" - pullup enable, "0" - pullup disable.
 	// Output "1" - logic one, "0" - logic zero.
 	// PB1, PB5 pullup enable.
-	PORTB = 0b00000010;	
-  26:	82 e0       	ldi	r24, 0x02	; 2
+	PORTB = 0b00100010;	
+  26:	82 e2       	ldi	r24, 0x22	; 34
   28:	88 bb       	out	0x18, r24	; 24
 	
 	while(1)

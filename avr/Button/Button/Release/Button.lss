@@ -1,0 +1,56 @@
+
+Button.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000003e  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .comment      00000030  00000000  00000000  00000092  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	09 c0       	rjmp	.+18     	; 0x14 <__ctors_end>
+   2:	0e c0       	rjmp	.+28     	; 0x20 <__bad_interrupt>
+   4:	0d c0       	rjmp	.+26     	; 0x20 <__bad_interrupt>
+   6:	0c c0       	rjmp	.+24     	; 0x20 <__bad_interrupt>
+   8:	0b c0       	rjmp	.+22     	; 0x20 <__bad_interrupt>
+   a:	0a c0       	rjmp	.+20     	; 0x20 <__bad_interrupt>
+   c:	09 c0       	rjmp	.+18     	; 0x20 <__bad_interrupt>
+   e:	08 c0       	rjmp	.+16     	; 0x20 <__bad_interrupt>
+  10:	07 c0       	rjmp	.+14     	; 0x20 <__bad_interrupt>
+  12:	06 c0       	rjmp	.+12     	; 0x20 <__bad_interrupt>
+
+00000014 <__ctors_end>:
+  14:	11 24       	eor	r1, r1
+  16:	1f be       	out	0x3f, r1	; 63
+  18:	cf e9       	ldi	r28, 0x9F	; 159
+  1a:	cd bf       	out	0x3d, r28	; 61
+  1c:	07 d0       	rcall	.+14     	; 0x2c <main>
+  1e:	0d c0       	rjmp	.+26     	; 0x3a <_exit>
+
+00000020 <__bad_interrupt>:
+  20:	ef cf       	rjmp	.-34     	; 0x0 <__vectors>
+
+00000022 <setups>:
+  22:	85 e0       	ldi	r24, 0x05	; 5
+  24:	87 bb       	out	0x17, r24	; 23
+  26:	8a e3       	ldi	r24, 0x3A	; 58
+  28:	88 bb       	out	0x18, r24	; 24
+  2a:	08 95       	ret
+
+0000002c <main>:
+  2c:	fa df       	rcall	.-12     	; 0x22 <setups>
+  2e:	b1 99       	sbic	0x16, 1	; 22
+  30:	02 c0       	rjmp	.+4      	; 0x36 <main+0xa>
+  32:	c0 9a       	sbi	0x18, 0	; 24
+  34:	fc cf       	rjmp	.-8      	; 0x2e <main+0x2>
+  36:	c0 98       	cbi	0x18, 0	; 24
+  38:	fa cf       	rjmp	.-12     	; 0x2e <main+0x2>
+
+0000003a <_exit>:
+  3a:	f8 94       	cli
+
+0000003c <__stop_program>:
+  3c:	ff cf       	rjmp	.-2      	; 0x3c <__stop_program>

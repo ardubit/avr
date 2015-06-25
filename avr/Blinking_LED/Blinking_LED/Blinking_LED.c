@@ -2,7 +2,7 @@
  * Blinking_LED.c
  * Blinking led - 1 Hz
  * Created: 23.05.2015 21:19:05
- * Author: LbookA
+ * Author: Aleksey's Lbook
  * MCU Atmel ATtiny13
  * 
  * 
@@ -22,7 +22,7 @@ int main(void)
 {
     
 	// Define direction for port pins. "0" - input, "1" - output. Easy to remember! Isn't it?
-	// Button on PB1. LED on PB2, others are output too, except PB5.
+	// Button is on PB1. LED attached to PB2, others are output too, except PB5.
 	// PB5 is RESET.
 	DDRB =  0b00011101;
 	
@@ -30,7 +30,7 @@ int main(void)
 	// Input "1" - pullup enable, "0" - pullup disable.
 	// Output "1" - logic one, "0" - logic zero.
 	// PB1, PB5 pullup enable.
-	PORTB = 0b00000010;	
+	PORTB = 0b00100010;	
 	
 	// Let's go to code!
 	// This program executed without button. Settings for button was done for future playgrounds.
