@@ -1,0 +1,204 @@
+
+Button_Multiply_Modes.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000a4  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000002  00800060  00800060  00000118  2**0
+                  ALLOC
+  2 .comment      00000030  00000000  00000000  00000118  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 00000028  00000000  00000000  00000148  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000159  00000000  00000000  00000170  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000000ef  00000000  00000000  000002c9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000161  00000000  00000000  000003b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000034  00000000  00000000  0000051c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000001a4  00000000  00000000  00000550  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    00000046  00000000  00000000  000006f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000018  00000000  00000000  0000073a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	09 c0       	rjmp	.+18     	; 0x14 <__ctors_end>
+   2:	16 c0       	rjmp	.+44     	; 0x30 <__bad_interrupt>
+   4:	15 c0       	rjmp	.+42     	; 0x30 <__bad_interrupt>
+   6:	14 c0       	rjmp	.+40     	; 0x30 <__bad_interrupt>
+   8:	13 c0       	rjmp	.+38     	; 0x30 <__bad_interrupt>
+   a:	12 c0       	rjmp	.+36     	; 0x30 <__bad_interrupt>
+   c:	11 c0       	rjmp	.+34     	; 0x30 <__bad_interrupt>
+   e:	10 c0       	rjmp	.+32     	; 0x30 <__bad_interrupt>
+  10:	0f c0       	rjmp	.+30     	; 0x30 <__bad_interrupt>
+  12:	0e c0       	rjmp	.+28     	; 0x30 <__bad_interrupt>
+
+00000014 <__ctors_end>:
+  14:	11 24       	eor	r1, r1
+  16:	1f be       	out	0x3f, r1	; 63
+  18:	cf e9       	ldi	r28, 0x9F	; 159
+  1a:	cd bf       	out	0x3d, r28	; 61
+
+0000001c <__do_clear_bss>:
+  1c:	20 e0       	ldi	r18, 0x00	; 0
+  1e:	a0 e6       	ldi	r26, 0x60	; 96
+  20:	b0 e0       	ldi	r27, 0x00	; 0
+  22:	01 c0       	rjmp	.+2      	; 0x26 <.do_clear_bss_start>
+
+00000024 <.do_clear_bss_loop>:
+  24:	1d 92       	st	X+, r1
+
+00000026 <.do_clear_bss_start>:
+  26:	a2 36       	cpi	r26, 0x62	; 98
+  28:	b2 07       	cpc	r27, r18
+  2a:	e1 f7       	brne	.-8      	; 0x24 <.do_clear_bss_loop>
+  2c:	07 d0       	rcall	.+14     	; 0x3c <main>
+  2e:	38 c0       	rjmp	.+112    	; 0xa0 <_exit>
+
+00000030 <__bad_interrupt>:
+  30:	e7 cf       	rjmp	.-50     	; 0x0 <__vectors>
+
+00000032 <setup>:
+char counter=0;
+char latch=0;
+
+void setup () {
+	// Button on PB1. LEDs on PB2, PB3.
+	DDRB =  0b00011101;
+  32:	8d e1       	ldi	r24, 0x1D	; 29
+  34:	87 bb       	out	0x17, r24	; 23
+	PORTB = 0b00100010;
+  36:	82 e2       	ldi	r24, 0x22	; 34
+  38:	88 bb       	out	0x18, r24	; 24
+  3a:	08 95       	ret
+
+0000003c <main>:
+}
+
+int main(void)
+{
+	setup();
+  3c:	fa df       	rcall	.-12     	; 0x32 <setup>
+			// Check again.
+			if (!(PINB & (1<<PB1)) && (latch == 0))
+			{
+				// Let's switch latch to avoid re-entry into the function until the button is pressed.
+				// Microcontroller is very fast!
+				latch=1;
+  3e:	91 e0       	ldi	r25, 0x01	; 1
+{
+	setup();
+	while(1)
+	{
+		// Check if the the button pressed.
+		if (!(PINB & (1<<PB1)))
+  40:	b1 99       	sbic	0x16, 1	; 22
+  42:	1b c0       	rjmp	.+54     	; 0x7a <__SREG__+0x3b>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  44:	ef e6       	ldi	r30, 0x6F	; 111
+  46:	f7 e1       	ldi	r31, 0x17	; 23
+  48:	31 97       	sbiw	r30, 0x01	; 1
+  4a:	f1 f7       	brne	.-4      	; 0x48 <__SREG__+0x9>
+  4c:	00 c0       	rjmp	.+0      	; 0x4e <__SREG__+0xf>
+  4e:	00 00       	nop
+		{
+			// Debounce.
+			_delay_ms (20);
+			
+			// Check again.
+			if (!(PINB & (1<<PB1)) && (latch == 0))
+  50:	b1 99       	sbic	0x16, 1	; 22
+  52:	13 c0       	rjmp	.+38     	; 0x7a <__SREG__+0x3b>
+  54:	80 91 60 00 	lds	r24, 0x0060
+  58:	81 11       	cpse	r24, r1
+  5a:	0f c0       	rjmp	.+30     	; 0x7a <__SREG__+0x3b>
+			{
+				// Let's switch latch to avoid re-entry into the function until the button is pressed.
+				// Microcontroller is very fast!
+				latch=1;
+  5c:	90 93 60 00 	sts	0x0060, r25
+				counter++;
+  60:	80 91 61 00 	lds	r24, 0x0061
+  64:	8f 5f       	subi	r24, 0xFF	; 255
+				
+				// When limit of modes is reached, reset the counter.
+				// Turn LEDs "off".
+				if (counter > 2)
+  66:	83 30       	cpi	r24, 0x03	; 3
+  68:	18 f4       	brcc	.+6      	; 0x70 <__SREG__+0x31>
+			if (!(PINB & (1<<PB1)) && (latch == 0))
+			{
+				// Let's switch latch to avoid re-entry into the function until the button is pressed.
+				// Microcontroller is very fast!
+				latch=1;
+				counter++;
+  6a:	80 93 61 00 	sts	0x0061, r24
+  6e:	05 c0       	rjmp	.+10     	; 0x7a <__SREG__+0x3b>
+				
+				// When limit of modes is reached, reset the counter.
+				// Turn LEDs "off".
+				if (counter > 2)
+				{
+					counter=0;
+  70:	10 92 61 00 	sts	0x0061, r1
+					// Same as: 
+					// PORTB &= ~(1<<PB2);
+					// PORTB &= ~(1<<PB3);
+					PORTB &= ~((1<<PB2) | (1<<PB3));
+  74:	88 b3       	in	r24, 0x18	; 24
+  76:	83 7f       	andi	r24, 0xF3	; 243
+  78:	88 bb       	out	0x18, r24	; 24
+				
+			}
+		}
+		
+		// When button is unpressed, turn back the latch.
+		if ((PINB & (1<<PB1)) && (latch == 1))
+  7a:	b1 9b       	sbis	0x16, 1	; 22
+  7c:	06 c0       	rjmp	.+12     	; 0x8a <__SREG__+0x4b>
+  7e:	80 91 60 00 	lds	r24, 0x0060
+  82:	81 30       	cpi	r24, 0x01	; 1
+  84:	11 f4       	brne	.+4      	; 0x8a <__SREG__+0x4b>
+		{
+			latch=0;
+  86:	10 92 60 00 	sts	0x0060, r1
+		}
+		
+		// Here is mode_1
+		if (counter == 1)
+  8a:	80 91 61 00 	lds	r24, 0x0061
+  8e:	81 30       	cpi	r24, 0x01	; 1
+  90:	09 f4       	brne	.+2      	; 0x94 <__SREG__+0x55>
+		{
+			PORTB |= (1<<PB2);
+  92:	c2 9a       	sbi	0x18, 2	; 24
+			
+		}
+		
+		// Here is mode_2
+		if (counter == 2)
+  94:	80 91 61 00 	lds	r24, 0x0061
+  98:	82 30       	cpi	r24, 0x02	; 2
+  9a:	91 f6       	brne	.-92     	; 0x40 <__SREG__+0x1>
+		{
+			PORTB |= (1<<PB3);
+  9c:	c3 9a       	sbi	0x18, 3	; 24
+  9e:	d0 cf       	rjmp	.-96     	; 0x40 <__SREG__+0x1>
+
+000000a0 <_exit>:
+  a0:	f8 94       	cli
+
+000000a2 <__stop_program>:
+  a2:	ff cf       	rjmp	.-2      	; 0xa2 <__stop_program>
