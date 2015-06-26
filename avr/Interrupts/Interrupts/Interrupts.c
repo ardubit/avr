@@ -18,7 +18,6 @@ unsigned char int0_flag=0;
 // It may seem that everything is happening at once, but it's not true. Everything is going one by one.
 // Interruption is a way to implement multitasking.
 
-
 // This is an interrupt vector "External Interrupt Request 0". All vectors look at the table 9-1, page 45.
 // When the interrupt occur, this code will execute.
 ISR (INT0_vect) {
@@ -28,10 +27,13 @@ ISR (INT0_vect) {
 	
 	/* ------- Simple software debounce without _delay_ms() function | Start ------- */
 	
-    // Delays in the interrupt vectors is not a good idea. Because when microcontroller wait a delay time and doing nothing, could occur another interrupts and you will lose event or data.
+	// Delays in the interrupt vectors is not a good idea. 
+	// Because when microcontroller wait a delay time and doing nothing, could occur another interrupts and you will lose event or data.
 	// I recommend leave a capacitor too.
 	
-	/* if (!(PINB & (1<<PB1)) && (int0_flag == 0))
+	/* 
+	
+	if (!(PINB & (1<<PB1)) && (int0_flag == 0))
 	{
 		int0_flag = 1;
 		
@@ -53,7 +55,6 @@ ISR (INT0_vect) {
 }
 
 void setup () {
-	
 	DDRB =  0b00011101;
 	PORTB = 0b00100010;
 	
@@ -63,8 +64,7 @@ void setup () {
 	// MCU Control Register contains control bits for interrupt sense control.
 	// The falling edge of INT0 generates an interrupt request. All settings look at the table 9-2, page 47.
 	MCUCR |= (1<<ISC01);
-	MCUCR &=~(1<<ISC00); 
-
+	MCUCR &=~(1<<ISC00);
 }
 
 void blink () {
