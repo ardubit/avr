@@ -1,6 +1,6 @@
 /*
  * Double_Click.c
- * One click toggle LED_1, two clicks toggle LED_2
+ * One click toggle LED_1, two clicks toggle LED_2.
  * Created: 27.06.2015 12:05:19
  * Author: LbookA
  * MCU Tiny13
