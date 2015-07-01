@@ -14,7 +14,7 @@
 volatile unsigned int timer_counter=0;
 unsigned int t2=0;
 unsigned char latch=0, pulse_counter=0;
-unsigned char one_click_state=0; 
+volatile unsigned char one_click_state=0; 
 unsigned char double_click_state=0;
 
 #define max_double_click 400 // ms. Usually a human reaction is near 300-350 ms.
@@ -24,7 +24,6 @@ ISR (TIM0_COMPA_vect) {
 	timer_counter++;
 	if (timer_counter == max_double_click)
 	{
-		
 		timer_counter=0;
 		
 		if (pulse_counter == 1)
@@ -80,11 +79,16 @@ void check_button () {
 			if (!(PINB & (1<<PB1)) && (latch == 0))
 			{
 				latch=1;
+				
+				cli(); // Disable interrupts.				
 				pulse_counter++;
+				sei(); // Enable interrupts.
 			
 				if (pulse_counter == 1)
 				{
+					cli(); // Disable interrupts.	
 					timer_counter=0;
+					sei(); // Enable interrupts.
 					t2=0;
 				}
 		
@@ -134,7 +138,9 @@ int main(void)
 		if (one_click_state == 1)
 		{
 			one_click();
+			cli();
 			one_click_state = 0;
+			sei();
 		}
 	}
 }
