@@ -11,8 +11,8 @@
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 
-volatile uint16_t timer_counter=0;
-int8_t flag=0;
+uint16_t timer_counter=0;
+volatile int8_t flag=0;
 
 #define BLINK_LED 500
 
