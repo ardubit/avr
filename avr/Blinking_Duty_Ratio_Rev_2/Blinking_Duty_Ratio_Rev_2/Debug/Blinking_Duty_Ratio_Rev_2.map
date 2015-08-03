@@ -1,17 +1,24 @@
 Archive member included because of file (symbol)
 
 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_exit.o)
-                              c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13.o (exit)
+                              c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13a.o (exit)
+c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+                              Blinking_Duty_Ratio_Rev_2.o (__do_copy_data)
 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_clear_bss.o)
-                              Blinking_Duty_Ratio.o (__do_clear_bss)
+                              Blinking_Duty_Ratio_Rev_2.o (__do_clear_bss)
+
+Allocating common symbols
+Common symbol       size              file
+
+prev_duty_cycle     0x2               Blinking_Duty_Ratio_Rev_2.o
 
 Discarded input sections
 
- .data          0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13.o
- .bss           0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13.o
- .text          0x00000000        0x0 Blinking_Duty_Ratio.o
- .data          0x00000000        0x0 Blinking_Duty_Ratio.o
- .bss           0x00000000        0x0 Blinking_Duty_Ratio.o
+ .data          0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13a.o
+ .bss           0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13a.o
+ .text          0x00000000        0x0 Blinking_Duty_Ratio_Rev_2.o
+ .data          0x00000000        0x0 Blinking_Duty_Ratio_Rev_2.o
+ .bss           0x00000000        0x0 Blinking_Duty_Ratio_Rev_2.o
  .text          0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_exit.o)
  .data          0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_exit.o)
@@ -28,6 +35,22 @@ Discarded input sections
                 0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_exit.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_exit.o)
+ .text          0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+ .data          0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+ .bss           0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
  .text          0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_clear_bss.o)
  .data          0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_clear_bss.o)
  .bss           0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_clear_bss.o)
@@ -59,8 +82,8 @@ user_signatures  0x00850000         0x00000400         rw !x
 
 Linker script and memory map
 
-LOAD c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13.o
-LOAD Blinking_Duty_Ratio.o
+LOAD c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13a.o
+LOAD Blinking_Duty_Ratio_Rev_2.o
 START GROUP
 LOAD c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack\libm.a
 END GROUP
@@ -160,9 +183,9 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000       0xc8
+.text           0x00000000      0x12a
  *(.vectors)
- .vectors       0x00000000       0x14 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13.o
+ .vectors       0x00000000       0x14 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13a.o
                 0x00000000                __vector_default
                 0x00000000                __vectors
  *(.vectors)
@@ -188,19 +211,21 @@ END GROUP
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000014        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13.o
+ .init0         0x00000014        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13a.o
                 0x00000014                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000014        0x8 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13.o
+ .init2         0x00000014        0x8 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13a.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x0000001c       0x10 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_clear_bss.o)
-                0x0000001c                __do_clear_bss
+ .init4         0x0000001c       0x16 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_copy_data.o)
+                0x0000001c                __do_copy_data
+ .init4         0x00000032       0x10 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_clear_bss.o)
+                0x00000032                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -211,36 +236,36 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x0000002c        0x4 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13.o
+ .init9         0x00000042        0x4 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13a.o
  *(.init9)
  *(.text)
- .text          0x00000030        0x2 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13.o
-                0x00000030                __vector_1
-                0x00000030                __bad_interrupt
-                0x00000030                __vector_3
-                0x00000030                __vector_7
-                0x00000030                __vector_5
-                0x00000030                __vector_4
-                0x00000030                __vector_9
-                0x00000030                __vector_2
-                0x00000030                __vector_8
-                0x00000032                . = ALIGN (0x2)
+ .text          0x00000046        0x2 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr25/tiny-stack/crttn13a.o
+                0x00000046                __vector_1
+                0x00000046                __bad_interrupt
+                0x00000046                __vector_3
+                0x00000046                __vector_7
+                0x00000046                __vector_5
+                0x00000046                __vector_4
+                0x00000046                __vector_9
+                0x00000046                __vector_2
+                0x00000046                __vector_8
+                0x00000048                . = ALIGN (0x2)
  *(.text.*)
  .text.__vector_6
-                0x00000032       0x56 Blinking_Duty_Ratio.o
-                0x00000032                __vector_6
- .text.Setup    0x00000088       0x24 Blinking_Duty_Ratio.o
-                0x00000088                Setup
+                0x00000048       0xa2 Blinking_Duty_Ratio_Rev_2.o
+                0x00000048                __vector_6
+ .text.Setup    0x000000ea       0x24 Blinking_Duty_Ratio_Rev_2.o
+                0x000000ea                Setup
  .text.Start_Blinking
-                0x000000ac       0x10 Blinking_Duty_Ratio.o
-                0x000000ac                Start_Blinking
- .text.main     0x000000bc        0x8 Blinking_Duty_Ratio.o
-                0x000000bc                main
-                0x000000c4                . = ALIGN (0x2)
+                0x0000010e       0x10 Blinking_Duty_Ratio_Rev_2.o
+                0x0000010e                Start_Blinking
+ .text.main     0x0000011e        0x8 Blinking_Duty_Ratio_Rev_2.o
+                0x0000011e                main
+                0x00000126                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000000c4        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_exit.o)
-                0x000000c4                _exit
-                0x000000c4                exit
+ .fini9         0x00000126        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_exit.o)
+                0x00000126                _exit
+                0x00000126                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -259,41 +284,48 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000000c4        0x4 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_exit.o)
+ .fini0         0x00000126        0x4 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr25/tiny-stack\libgcc.a(_exit.o)
  *(.fini0)
-                0x000000c8                _etext = .
+                0x0000012a                _etext = .
 
-.data           0x00800060        0x0 load address 0x000000c8
+.data           0x00800060        0x2 load address 0x0000012a
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
+ .data.duty_cycle
+                0x00800060        0x2 Blinking_Duty_Ratio_Rev_2.o
+                0x00800060                duty_cycle
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x00800060                . = ALIGN (0x2)
-                0x00800060                _edata = .
-                0x00800060                PROVIDE (__data_end, .)
+                0x00800062                . = ALIGN (0x2)
+                0x00800062                _edata = .
+                0x00800062                PROVIDE (__data_end, .)
 
-.bss            0x00800060        0x3
-                0x00800060                PROVIDE (__bss_start, .)
+.bss            0x00800062        0x6
+                0x00800062                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.led_flag  0x00800060        0x1 Blinking_Duty_Ratio.o
-                0x00800060                led_flag
+ .bss.state     0x00800062        0x1 Blinking_Duty_Ratio_Rev_2.o
+                0x00800062                state
+ .bss.led_flag  0x00800063        0x1 Blinking_Duty_Ratio_Rev_2.o
+                0x00800063                led_flag
  .bss.timer_counter
-                0x00800061        0x2 Blinking_Duty_Ratio.o
-                0x00800061                timer_counter
+                0x00800064        0x2 Blinking_Duty_Ratio_Rev_2.o
+                0x00800064                timer_counter
  *(COMMON)
-                0x00800063                PROVIDE (__bss_end, .)
-                0x000000c8                __data_load_start = LOADADDR (.data)
-                0x000000c8                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800066        0x2 Blinking_Duty_Ratio_Rev_2.o
+                0x00800066                prev_duty_cycle
+                0x00800068                PROVIDE (__bss_end, .)
+                0x0000012a                __data_load_start = LOADADDR (.data)
+                0x0000012c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800063        0x0
-                0x00800063                PROVIDE (__noinit_start, .)
+.noinit         0x00800068        0x0
+                0x00800068                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800063                PROVIDE (__noinit_end, .)
-                0x00800063                _end = .
-                0x00800063                PROVIDE (__heap_start, .)
+                0x00800068                PROVIDE (__noinit_end, .)
+                0x00800068                _end = .
+                0x00800068                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -334,7 +366,7 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 Blinking_Duty_Ratio.o
+ .comment       0x00000000       0x30 Blinking_Duty_Ratio_Rev_2.o
                                  0x31 (size before relaxing)
 
 .note.gnu.build-id
@@ -355,35 +387,35 @@ END GROUP
 .debug_aranges  0x00000000       0x38
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x38 Blinking_Duty_Ratio.o
+                0x00000000       0x38 Blinking_Duty_Ratio_Rev_2.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x11d
+.debug_info     0x00000000      0x178
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x11d Blinking_Duty_Ratio.o
+ .debug_info    0x00000000      0x178 Blinking_Duty_Ratio_Rev_2.o
 
-.debug_abbrev   0x00000000       0xa6
+.debug_abbrev   0x00000000       0xc0
  *(.debug_abbrev)
- .debug_abbrev  0x00000000       0xa6 Blinking_Duty_Ratio.o
+ .debug_abbrev  0x00000000       0xc0 Blinking_Duty_Ratio_Rev_2.o
 
-.debug_line     0x00000000       0xfa
+.debug_line     0x00000000      0x114
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000       0xfa Blinking_Duty_Ratio.o
+ .debug_line    0x00000000      0x114 Blinking_Duty_Ratio_Rev_2.o
 
-.debug_frame    0x00000000       0x70
+.debug_frame    0x00000000       0x74
  *(.debug_frame)
- .debug_frame   0x00000000       0x70 Blinking_Duty_Ratio.o
+ .debug_frame   0x00000000       0x74 Blinking_Duty_Ratio_Rev_2.o
 
-.debug_str      0x00000000      0x17f
+.debug_str      0x00000000      0x1af
  *(.debug_str)
- .debug_str     0x00000000      0x17f Blinking_Duty_Ratio.o
-                                0x1ba (size before relaxing)
+ .debug_str     0x00000000      0x1af Blinking_Duty_Ratio_Rev_2.o
+                                0x1fa (size before relaxing)
 
-.debug_loc      0x00000000       0x56
+.debug_loc      0x00000000       0x79
  *(.debug_loc)
- .debug_loc     0x00000000       0x56 Blinking_Duty_Ratio.o
+ .debug_loc     0x00000000       0x79 Blinking_Duty_Ratio_Rev_2.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -405,9 +437,9 @@ END GROUP
 
 .debug_ranges   0x00000000       0x28
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x28 Blinking_Duty_Ratio.o
+ .debug_ranges  0x00000000       0x28 Blinking_Duty_Ratio_Rev_2.o
 
 .debug_macro
  *(.debug_macro)
-OUTPUT(Blinking_Duty_Ratio.elf elf32-avr)
+OUTPUT(Blinking_Duty_Ratio_Rev_2.elf elf32-avr)
 LOAD linker stubs

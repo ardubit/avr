@@ -1,7 +1,7 @@
 /*
- * Blinking_Duty_Ratio.c
- * LED 100 ms - on, 900 ms - off.
- * Created: 01.08.2015 22:16:59
+ * Blinking_Duty_Ratio_Rev_2.c
+ * Duty Cycle of LED - 50 ms.
+ * Created: 03.08.2015 9:48:12
  * Author: LbookA
  * CPU ATtiny13
  */ 
@@ -10,11 +10,11 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-uint16_t timer_counter=0;
-volatile int8_t led_flag=0;
+uint16_t timer_counter = 0;
+volatile int8_t led_flag = 0;
 
-#define BLINK_LED_ON_TIME	100
-#define BLINK_LED_OFF_TIME	900
+int prev_duty_cycle, duty_cycle = 50;
+char state = 0;
 
 #define tog(x)	^= (1<<x)
 #define set(x)	|= (1<<x)
@@ -26,19 +26,24 @@ ISR (TIM0_COMPA_vect) {
 	
 	timer_counter++;
 	
-	if (timer_counter >= BLINK_LED_OFF_TIME)
+	if ((timer_counter >= duty_cycle) && (!state))
 	{
-		timer_counter=0;
+		timer_counter = 0;
+		prev_duty_cycle = duty_cycle;
+		int period = 1000;
+		duty_cycle = period - duty_cycle;
+		state = 1;
+		led_flag = 1;
 	}
 	
-	if (timer_counter <= BLINK_LED_ON_TIME)
+	if ((timer_counter >= duty_cycle) && (state))
 	{
-		led_flag=1;
+		timer_counter = 0;
+		duty_cycle = prev_duty_cycle;
+		state = 0;
+		led_flag = 0;
 	}
-	else
-	{
-		led_flag=0;
-	}
+	
 	
 }
 
@@ -72,11 +77,11 @@ void Start_Blinking() {
 	
 	if (led_flag)
 	{
-		PORTB set(LED);
+		PORTB clr(LED);
 	}
 	else
 	{
-		PORTB clr(LED);
+		PORTB set(LED);
 	}
 	
 }
@@ -88,9 +93,7 @@ int main(void)
 	
 	while(1)
 	{
-		Start_Blinking();	
+		Start_Blinking();
 	}
 }
-
-
 

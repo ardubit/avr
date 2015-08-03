@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Blinking_Duty_Ratio_Rev_2", "Blinking_Duty_Ratio_Rev_2\Blinking_Duty_Ratio_Rev_2.cproj", "{8FA4F039-ABB1-401E-A9BD-9B38C690E573}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FA4F039-ABB1-401E-A9BD-9B38C690E573}.Debug|AVR.ActiveCfg = Debug|AVR
+		{8FA4F039-ABB1-401E-A9BD-9B38C690E573}.Debug|AVR.Build.0 = Debug|AVR
+		{8FA4F039-ABB1-401E-A9BD-9B38C690E573}.Release|AVR.ActiveCfg = Release|AVR
+		{8FA4F039-ABB1-401E-A9BD-9B38C690E573}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
