@@ -1,3 +1,2 @@
 # Playground
-Location for educational projects.
-Atmel microcontrollers.
+Location for educational projects of Atmel AVR microcontrollers.
