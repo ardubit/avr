@@ -13,7 +13,10 @@
 
 # 
 
-Would you like to learn microcontrollers? Do you think it is easy? :exploding_head:
+Would you like to learn microcontrollers? 
+Do you think it is easy?
+
+:exploding_head:
 
 Even tiny 1KB memory microcontrollers (like ATtiny13) require a deep knowledge of various fields of science such as electronics, programming, digital logic, math. Microcontrollers are not huge banking systems, and probably, programming of them will not guarantee you to earn tons of money, but it is definitely fun units for life. Just imagine what technological power people need to produce these logical units and you as a developer can get them just less, more than $1!
 
