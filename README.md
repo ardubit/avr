@@ -2,7 +2,6 @@
 
 Atmel(Microchip) AVR Educational projects
 Author: Aleksey M.
--------------
 
 <img src="./files/original_d8640b09-4bfb-4f08-b7fc-b8e73f873de8_20220204_152630.jpg" width="500" height="500">
 
@@ -21,5 +20,4 @@ Compilation: GCC, Make
 Burning: AVRdude Utility, USBasp or any ISP programmer
 
 # Projects:
--------------
 
