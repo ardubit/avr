@@ -8,37 +8,63 @@
 // MCU Frequency - 1,2 MHz
 // 9,6 MHz default clock with prescaling of 8. See page 26
 #define F_CPU 1200000UL
+#define LED PB3
 
-// Input/Output definition library for work with registers names
+// Input/Output definition library. Needs for work with registers names
 #include <avr/io.h>
 
-// The library required to define F_CPU, it was done before
+// The delay library requires to define F_CPU, it was done before
 #include <util/delay.h>
 
 int main(void)
 {
+	/* 
+	Define direction for port pins 
+	---------------------------------------
+	"0" - input, "1" - output
+	Unused "*" pins config to - Inputs with enabled internal pull-up resistors
 
-	// Define direction for port pins. "0" - input, "1" - output
-	// Button is on PB1. LED attached to the PB2 - 1k - GND, others are outputs, except PB5
-	// PB5 is RESET
-	DDRB = 0b00011101;
+	PB0 - Button 
+	PB1 - *
+	PB2	- *
+	PB3 - LED - 2,2k - GND
+	PB4 - *
+	PB5 - Reset (input)
 
-	// Define pullups resistors to "VCC" or output logic states of pins
-	// Input "1" - pullup enable, "0" - pullup disable
-	// Output "1" - logic one, "0" - logic zero
-	// PB1, PB5 pullup enable
-	PORTB = 0b00100010;
+	PB6, PB7 are Read-only bits
 
-	// The program executed without button. 
-	// Settings for button was done for future playgrounds
+	DC Current per I/O Pin 40.0mA
+	LEDred Vf = 1,65V, I = 1,5mA
+	VCC = 5V
+	R = (5V - 1,65V) / 2 = 2,23K = 2,2K
+	*/
+
+	DDRB = 0b00001000;
+
+	/* 
+	Define pullups resistors to "VCC" for inputs 
+	or logic states for outputs
+	Input "1" - pullup enable, "0" - pullup disable
+	Output "1" - logic one, "0" - logic zero
+	*/
+
+	PORTB = 0b00110111;
+
+	/* 
+	The program executes without button. Settings for button was done 
+	for future playgrounds
+	*/
+
 	while (1)
 	{
-		// Toggle bit! LED ON/OFF
-		PORTB ^= (1 << PB2);
+		// Toggle bit. LED ON/OFF
+		PORTB ^= (1 << LED);
 
-		// f = 1/T, T = 1 sec, There are two states in the period: led on, led off
-		// Set the delay in milliseconds
-		_delay_ms(500);
+		// f = 1/T, T = 1 sec
+		// There are two states in the period: led on, led off
+
+		// Delay time in milliseconds
+		_delay_ms(100);
 
 		// Classic "Hello World" program
 		//PORTB |= (1<<PB2);

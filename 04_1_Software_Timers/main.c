@@ -1,5 +1,5 @@
 /*
- * LED - ON 100 ms, OFF - 900 ms.
+ * Software Timers
  * Created: 01.08.2015 22:16:59
  * Author: Aleksey M.
  * MCU ATtiny13
@@ -9,18 +9,11 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-uint16_t timer_counter = 0;
+uint16_t soft_timer_ctr = 0; // Count up to 65536 - 1
 volatile uint8_t led_flag = 0;
 
-#define LED_ON_TIME 100
-#define LED_OFF_TIME 900
-
-// Macros
-#define tog(x) ^= (1 << x)
-#define set(x) |= (1 << x)
-#define clr(x) &= ~(1 << x)
-
-#define LED PB2
+#define TOGGLE_TIME 500
+#define SW_TIMER_RESET 500
 
 /* 
 - Timer T0 (8-bit) counts up to (or bi-directional) – (2^8) - 1 = 255
@@ -32,27 +25,28 @@ volatile uint8_t led_flag = 0;
 // Timer/Counter Compare Match A Vector
 ISR(TIM0_COMPA_vect)
 {
-	timer_counter++;
-	if (timer_counter >= LED_OFF_TIME)
+	// Software timer variable
+	soft_timer_ctr++;
+
+	// Reset STimer
+	if (soft_timer_ctr >= SW_TIMER_RESET)
 	{
-		timer_counter = 0;
+		soft_timer_ctr = 0;
+		
+		// Toggle flag for LED
+		led_flag = !led_flag; // led_flag ^= 1;
 	}
 
-	if (timer_counter <= LED_ON_TIME)
-	{
-		led_flag = 1;
-	}
-	else
-	{
-		led_flag = 0;
-	}
+	// N - timers here...
+	//
+	//
 }
 
 void setup()
 {
-	// LEDs on the PB2, PB3
-	DDRB = 0b00011101;
-	PORTB = 0b00100010;
+	// LED on the PB4
+	DDRB |= (1 << PB4);
+	PORTB = (1 << PB5) | (0 << PB4) | (1 << PB3) | (1 << PB2) | (1 << PB1) | (1 << PB0);
 
 	// Analog comparator OFF
 	ACSR |= (1 << ACD);
@@ -76,7 +70,6 @@ void setup()
 
 	0,006666666666667 ms	-> 1 incr
 	1 ms 									-> x
-
 	x = 1/0,006666666666667 = 150
 
 	Timer Clock calculations Second Way:
@@ -105,14 +98,9 @@ void setup()
 
 void start_Blink()
 {
-
 	if (led_flag)
 	{
-		PORTB set(LED);
-	}
-	else
-	{
-		PORTB clr(LED);
+		PORTB ^= (1 << PB2);
 	}
 }
 

@@ -11,19 +11,19 @@
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 
-uint16_t timer_counter=0;
+uint16_t soft_timer_ctr=0;
 volatile int8_t flag=0;
 
 #define BLINK_LED 500
 
 ISR (TIM0_COMPA_vect) {
 	
-	timer_counter++;
+	soft_timer_ctr++;
 	
 	
-	if (timer_counter >= BLINK_LED)
+	if (soft_timer_ctr >= BLINK_LED)
 	{
-		timer_counter=0;
+		soft_timer_ctr=0;
 		flag=1;
 	}
 	
