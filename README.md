@@ -37,7 +37,7 @@ It can be used as quick solutions.
 
 ## 3. Pinout
 
-<img src="./files/ATtiny13-Pinout.png">
+<img src="./files/ATtiny13-Pinout.svg">
 
 ## 4. Projects
 - 01_Blinking_LED
