@@ -37,5 +37,14 @@ It can be used as quick solutions.
 - Compilation: GCC, Make
 - Burning: AVRdude Utility, USBasp or any ISP programmer
 
+## Pinout
+
+<img src="./files/ATtiny13-Pinout.png" width="500">
+
 # Projects:
+
+-
+-
+-
+-
 
