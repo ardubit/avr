@@ -11,7 +11,7 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-unsigned char int0_flag = 0;
+volatile unsigned char int0_flag = 0;
 
 /*
 MCU execute two tasks: blinking LED_1 and toggle LED_2 when interrupt is occur.
@@ -19,15 +19,23 @@ It may seems that everything is happening at once, but it's not true. Everything
 Interrupts is a way to implement multitasking.
 */
 
-/*
-This is an interrupt vector – "External Interrupt Request 0". For all vectors look at the table 9-1,
-page 45 of datasheet. When the interrupt occur, this code will be executed
-*/
-
 // For hardware debounce reduction, add in parallel with the button 100N capacitor
+
+/*
+	About volatile
+	-----------------
+	- If a variable can be changed out of compiler scope at any time, in interrupt isr, by button
+	it should be processed without any optimization and marked as "volatile".
+	- Global variables modified in interrupt handler also marked as "volatile".
+*/
 
 ISR(INT0_vect)
 {
+	/*
+	This is an interrupt vector – "External Interrupt Request 0". For all vectors look at the table 9-1,
+	page 45 of datasheet. When the interrupt occur, this code will be executed
+	*/
+
 	// ---------------------------------------------------------------
 	// Simple SOFTWARE DEBOUNCE without _delay_ms() function | Start
 	// ---------------------------------------------------------------
@@ -70,24 +78,25 @@ void setup()
 	PB5 - Reset (input)
 	*/
 
-	DDRB = (1 << PB4) | (1 << PB3) | (0 << PB2) | (0 << PB1) | (0 << PB0);
-	PORTB = (0 << PB4) | (0 << PB3) | (1 << PB2) | (1 << PB1) | (1 << PB0);
+	DDRB |= (0 << PB5) | (1 << PB4) | (1 << PB3) | (0 << PB2) | (0 << PB1) | (0 << PB0);
+	PORTB |= (1 << PB5) | (0 << PB4) | (0 << PB3) | (1 << PB2) | (1 << PB1) | (1 << PB0);
 
+	// ------ Interrupt Setup ------ //
 	// General Interrupt Mask Register
 	// The bit 6 turn ON Interrupt Request on INT0 pin
-
-	GIMSK = (1 << INT0);
+	GIMSK |= (1 << INT0);
 
 	/*
 	MCU Control Register
 	--------------------
-	Contains bits for interrupt sense control. 
+	Contains bits for interrupt sense control.
 	All of the settings look at the table 9-2, page 47
 	*/
 
 	// The falling edge of INT0 generates an interrupt request
-	MCUCR |= (1 << ISC01); // Set bit to "1"
+	MCUCR |= (1 << ISC01);	// Set bit to "1"
 	MCUCR &= ~(1 << ISC00); // Clear bit to "0"
+	
 }
 
 void blink()
@@ -111,4 +120,5 @@ int main(void)
 	{
 		blink();
 	}
+	return 0;
 }

@@ -3,19 +3,21 @@
  * Created: 01.08.2015 22:16:59
  * Author: Aleksey M.
  * MCU ATtiny13
+ * Tested
  */
 
 #define F_CPU 1200000UL
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdbool.h>
 
-uint16_t soft_timer_ctr = 0; // Count up to 65536 - 1
-volatile uint8_t led_flag = 0;
+volatile uint16_t soft_timer_ctr = 0; // Count up to 65536 - 1
+volatile bool f_led = false;
 
-#define TOGGLE_TIME 500
-#define SW_TIMER_RESET 500
+#define SW_TIMER_VALUE 250
+#define LED PB3
 
-/* 
+/*
 - Timer T0 (8-bit) counts up to (or bi-directional) – (2^8) - 1 = 255
 - Timer clock frequency equal to system clock frequency = 1,2 MHz (or by external clock source)
 - Prescaler can be used as a clock source: fCLK_io/8, fCLK_io/64, fCLK_io/256, or fCLK_io/1024
@@ -25,16 +27,17 @@ volatile uint8_t led_flag = 0;
 // Timer/Counter Compare Match A Vector
 ISR(TIM0_COMPA_vect)
 {
-	// Software timer variable
-	soft_timer_ctr++;
-
 	// Reset STimer
-	if (soft_timer_ctr >= SW_TIMER_RESET)
+	if (soft_timer_ctr <= SW_TIMER_VALUE)
+	{
+		// Software timer variable
+		soft_timer_ctr++;
+	}
+	else
 	{
 		soft_timer_ctr = 0;
-		
 		// Toggle flag for LED
-		led_flag = !led_flag; // led_flag ^= 1;
+		f_led = !f_led; // f_led ^= 1;
 	}
 
 	// N - timers here...
@@ -44,9 +47,16 @@ ISR(TIM0_COMPA_vect)
 
 void setup()
 {
-	// LED on the PB4
-	DDRB |= (1 << PB4);
-	PORTB = (1 << PB5) | (0 << PB4) | (1 << PB3) | (1 << PB2) | (1 << PB1) | (1 << PB0);
+	/*
+	PB0, PB1, PB2 - *
+	PB3 - LED - 2,2k - GND
+	PB4 - *
+	PB5 - Reset (input)
+	*/
+
+	// Always set all bits!
+	DDRB |= (0 << PB5) | (0 << PB4) | (1 << PB3) | (0 << PB2) | (0 << PB1) | (0 << PB0);
+	PORTB |= (1 << PB5) | (1 << PB4) | (0 << PB3) | (1 << PB2) | (1 << PB1) | (1 << PB0);
 
 	// Analog comparator OFF
 	ACSR |= (1 << ACD);
@@ -65,7 +75,7 @@ void setup()
 
 	Let's take 1 ms:
 	- After 1 ms timer T0 will overflow
-	- Generate an interrupt 
+	- Generate an interrupt
 	- MCU will go to the Timer's ISR routine
 
 	0,006666666666667 ms	-> 1 incr
@@ -78,19 +88,19 @@ void setup()
 	150KHz / 150 = 1 overflow per ms.
 	*/
 
-	// Enable time T0 overflow interrupt
-	TIMSK0 |= (1 << OCIE0A);
-
 	// Enable CTC Mode
 	TCCR0A |= (1 << WGM01);
 
 	/*
-	In CTC mode the counter is cleared to zero when the counter value
+	In the CTC mode the counter is cleared to zero when the counter value
 	TCNT0 matches the OCR0A
 	*/
 
 	// T0 will overflow each 1 ms (0,001 sec)
 	OCR0A = 150;
+
+	// Enable time T0 overflow interrupt
+	TIMSK0 |= (1 << OCIE0A);
 
 	// Reset timer T0 flags
 	TIFR0 = 0;
@@ -98,9 +108,9 @@ void setup()
 
 void start_Blink()
 {
-	if (led_flag)
+	if (f_led)
 	{
-		PORTB ^= (1 << PB2);
+		PORTB ^= (1 << LED);
 	}
 }
 
@@ -108,9 +118,9 @@ int main(void)
 {
 	setup();
 	sei();
-
 	while (1)
 	{
 		start_Blink();
 	}
+	return 0;
 }

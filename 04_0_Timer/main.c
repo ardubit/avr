@@ -51,10 +51,25 @@ void setup()
 	DDRB = 0b00011000;
 	PORTB = 0b00100111;
 
-	/* ----------- Timer Setup  -----------
-	Timer T0 (8-bit) counts up to (or bi-directional) = (2^8) - 1 = 255
-	Then timer's register TCNT0 will overflow
+	/* 
+	Timer Setup  
+	---------------------------------------
+	Timer T0 (8-bit) counts up to (or bi-directional) = (2^8) - 1 = 255, 
+	then timer's register TCNT0 will overflow.
 	*/
+
+	/*
+	Timer/Counter Control Register A
+	---------------------------------------
+	- Timer mode: Normal port operation
+	- Waveform generation: "OFF", OC0A disconnected
+	
+	Normal Mode set by default:
+	COM0A1, COM0A0 – [0,0]
+	*/
+
+	// Normal Mode
+	TCCR0A &= ~((1 << COM0A1) | (1 << COM0A0));
 
 	// Start timer T0 with No prescaling
 	TCCR0B |= (1 << CS00);
@@ -94,6 +109,7 @@ int main(void)
 	{
 		asm("nop");
 	}
+	return 0;
 }
 
 /*

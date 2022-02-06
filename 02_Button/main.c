@@ -64,4 +64,5 @@ int main(void)
 			_delay_ms(250);
 		}
 	}
+	return 0;
 }

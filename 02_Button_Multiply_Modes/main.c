@@ -80,4 +80,5 @@ int main(void)
 			PORTB |= (1 << LED2);
 		}
 	}
+	return 0;
 }

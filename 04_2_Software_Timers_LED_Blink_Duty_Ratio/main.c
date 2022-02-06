@@ -3,14 +3,23 @@
  * Created: 01.08.2015 22:16:59
  * Author: Aleksey M.
  * MCU ATtiny13
+ * Tested
  */
+
+/*
+The duty cycle describes the amount of time the signal is in a HIGH (on) state
+as a percentage of the total time of it takes to complete one cycle.
+
+Full cycle - 1s, HIGH - 100 ms, LOW - 900 ms
+*/
 
 #define F_CPU 1200000UL
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdbool.h>
 
-uint16_t timer_counter = 0;
-volatile uint8_t led_flag = 0;
+volatile uint16_t timer_counter = 0;
+volatile bool led_flag = false;
 
 #define LED_ON_TIME 100
 #define LED_OFF_TIME 900
@@ -20,9 +29,9 @@ volatile uint8_t led_flag = 0;
 #define set(x) |= (1 << x)
 #define clr(x) &= ~(1 << x)
 
-#define LED PB2
+#define LED PB3
 
-/* 
+/*
 - Timer T0 (8-bit) counts up to (or bi-directional) – (2^8) - 1 = 255
 - Timer clock frequency equal to system clock frequency = 1,2 MHz (or by external clock source)
 - Prescaler can be used as a clock source: fCLK_io/8, fCLK_io/64, fCLK_io/256, or fCLK_io/1024
@@ -50,9 +59,16 @@ ISR(TIM0_COMPA_vect)
 
 void setup()
 {
-	// LEDs on the PB2, PB3
-	DDRB = 0b00011101;
-	PORTB = 0b00100010;
+	/*
+	PB0, PB1, PB2 - *
+	PB3 - LED - 2,2k - GND
+	PB4 - *
+	PB5 - Reset (input)
+	*/
+
+	// Always set all bits!
+	DDRB |= (0 << PB5) | (0 << PB4) | (1 << PB3) | (0 << PB2) | (0 << PB1) | (0 << PB0);
+	PORTB |= (1 << PB5) | (1 << PB4) | (0 << PB3) | (1 << PB2) | (1 << PB1) | (1 << PB0);
 
 	// Analog comparator OFF
 	ACSR |= (1 << ACD);
@@ -84,9 +100,6 @@ void setup()
 	150KHz / 150 = 1 overflow per ms.
 	*/
 
-	// Enable time T0 overflow interrupt
-	TIMSK0 |= (1 << OCIE0A);
-
 	// Enable CTC Mode
 	TCCR0A |= (1 << WGM01);
 
@@ -98,13 +111,15 @@ void setup()
 	// T0 will overflow each 1 ms (0,001 sec)
 	OCR0A = 150;
 
+	// Enable time T0 overflow interrupt
+	TIMSK0 |= (1 << OCIE0A);
+
 	// Reset timer T0 flags
 	TIFR0 = 0;
 }
 
 void start_Blink()
 {
-
 	if (led_flag)
 	{
 		PORTB set(LED);
@@ -119,7 +134,6 @@ int main(void)
 {
 	setup();
 	sei();
-
 	while (1)
 	{
 		start_Blink();

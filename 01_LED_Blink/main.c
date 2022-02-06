@@ -72,4 +72,7 @@ int main(void)
 		//PORTB &= ~(1<<PB2);
 		//_delay_ms (500);
 	}
+
+	// Should it return something?
+	return 0;
 }
