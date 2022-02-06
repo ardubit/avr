@@ -1,4 +1,4 @@
-# AVR Playground
+# AVR ATtiny13 Playground
 
 - Atmel(Microchip) AVR Educational projects
 - Author: Aleksey M.
@@ -14,7 +14,7 @@
 - 2 PWM Channels
 - One 10-bit ADC, 4 Channels
 
-#
+## 1. Intro
 
 Would you like to learn microcontrollers? 
 Do you think it is easy?
@@ -29,17 +29,17 @@ It can be used as quick solutions.
 
 :v:
 
-## AVR Environment Setup. Compilation & MCU Burning
+## 2. AVR Environment Setup. Compilation & MCU Burning
 - Win: Install WinAVR
 - Mac: https://eekit.blogspot.com/2019/08/how-to-setup-environment-for-avr.html
 - Compilation: GCC, Make
 - Burning: AVRdude Utility, USBasp or any ISP programmer
 
-## Pinout
+## 3. Pinout
 
 <img src="./files/ATtiny13-Pinout.png">
 
-# Projects:
+# 4. Projects:
 -
 -
 -
