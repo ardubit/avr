@@ -39,9 +39,9 @@ It can be used as quick solutions.
 
 <img src="./files/ATtiny13-Pinout.png">
 
-## 4. Projects:
-- [x] 01_Blinking_LED
-- [x]
-- [x]
-- [x]
+## 4. Projects
+- 01_Blinking_LED
+-
+-
+-
 
