@@ -1,4 +1,4 @@
-# AVR ATtiny13 Playground
+# AVR [ATtiny13] Playground
 
 - Atmel(Microchip) AVR Educational projects
 - Author: Aleksey M.
@@ -39,9 +39,9 @@ It can be used as quick solutions.
 
 <img src="./files/ATtiny13-Pinout.png">
 
-# 4. Projects:
--
--
--
--
+## 4. Projects:
+[x] 01_Blinking_LED
+[x]
+[x]
+[x]
 
