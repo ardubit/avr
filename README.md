@@ -29,20 +29,17 @@ It can be used as quick solutions.
 
 :v:
 
-## AVR Environment Setup
+## AVR Environment Setup. Compilation & MCU Burning
 - Win: Install WinAVR
 - Mac: https://eekit.blogspot.com/2019/08/how-to-setup-environment-for-avr.html
-
-## Compilation & MCU Burning
 - Compilation: GCC, Make
 - Burning: AVRdude Utility, USBasp or any ISP programmer
 
 ## Pinout
 
-<img src="./files/ATtiny13-Pinout.png" width="500">
+<img src="./files/ATtiny13-Pinout.png">
 
 # Projects:
-
 -
 -
 -
