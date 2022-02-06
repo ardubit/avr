@@ -1,27 +1,30 @@
 /*
- * Timer Interrupts
+ * Timer Interrupts. LED toggle in the Timer's ISR.
  * Created: 24.05.2015 16:55:36
  * Author: Aleksey M.
  * MCU ATtiny13
+ * Tested
  */
 
 #define F_CPU 1200000UL
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 
-// #define LED0_ON PORTB = PORTB | (1 << PB0)
-// #define LED0_OFF PORTB = PORTB & ~(1 << PB0)
+// #define LED1_ON PORTB = PORTB | (1 << PB3)
+// #define LED1_OFF PORTB = PORTB & ~(1 << PB3)
 
-// #define LED2_ON PORTB = PORTB | (1 << PB2)
-// #define LED2_OFF PORTB = PORTB & ~(1 << PB2)
+// #define LED2_ON PORTB = PORTB | (1 << PB4)
+// #define LED2_OFF PORTB = PORTB & ~(1 << PB4)
 
-#define LED2_TOG PORTB ^= (1 << PB2)
-#define LED0_TOG PORTB ^= (1 << PB0)
+#define LED1_TOG PORTB ^= (1 << PB3)
+// #define LED2_TOG PORTB ^= (1 << PB4)
 
 // Timer/Counter Overflow
 ISR(TIM0_OVF_vect)
 {
-	LED2_TOG;
+	LED1_TOG;
+	_delay_ms(50); // It's only for debug. Do not use delays in the ISRs!
 }
 
 // Timer/Counter Compare Match A - OCR0A
@@ -38,27 +41,38 @@ ISR(TIM0_COMPB_vect)
 
 void setup()
 {
-	// LEDs on the PB0, PB2
-	DDRB = 0b00000101;
-	PORTB = 0b00111010;
+	/*
+	PB0, PB1, PB2 - *
+	PB3 - LED - 2,2k - GND
+	PB4 - LED - 2,2k - GND
+	PB5 - Reset (input)
+	*/
 
-	// ----------- Timer Setup  ----------- //
+	DDRB = 0b00011000;
+	PORTB = 0b00100111;
+
+	/* ----------- Timer Setup  -----------
+	Timer T0 (8-bit) counts up to (or bi-directional) = (2^8) - 1 = 255
+	Then timer's register TCNT0 will overflow
+	*/
+
 	// Start timer T0 with No prescaling
 	TCCR0B |= (1 << CS00);
 
-	// Timer/Counter Interrupt Mask Register
-	// Overflow interrupt enable
+	// Timer/Counter Interrupt Mask Register. Overflow interrupt enable
 	TIMSK0 |= (1 << TOIE0);
 
 	// Compare Match A, B Interrupt
 	// Uncomment to enable
 	// TIMSK0 |= (0<<OCIE0A) | (0<<OCIE0B);
 
-	// The Timer (TCNT0) and Output Compare Registers (OCR0A and OCR0B)
-	// When value in the TCNT0 == OCR0A CPU can generate compare match interrupt
-	// OCR0A = 100;
+	/*
+	The Timer (TCNT0) and Output Compare Registers (OCR0A and OCR0B).
+	When value in the TCNT0 == OCR0A CPU can generate compare match interrupt
+	*/
 
-	// OCR0B compare register value
+	// OCR0A,B compare register values
+	// OCR0A = 100;
 	// OCR0B = 200;
 
 	// Analog comparator OFF
@@ -83,10 +97,10 @@ int main(void)
 }
 
 /*
-if 
+if
 asm("nop") isn't recognized by compiler
 
-Edit make file to: 
+Edit make file to:
 option -std=c99 to -std=gnu99
 
 For c99 mode, the compiler does not recognise 'asm', '__asm' ist required instead!

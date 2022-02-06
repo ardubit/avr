@@ -3,6 +3,7 @@
  * Created: 23.05.2015 21:19:05
  * Author: Aleksey M.
  * MCU Atmel ATtiny13
+ * Tested
  */
 
 // MCU Frequency - 1,2 MHz
@@ -18,19 +19,18 @@
 
 int main(void)
 {
-	/* 
-	Define direction for port pins 
+	/*
+	Define direction for port pins
 	---------------------------------------
 	"0" - input, "1" - output
 	Unused "*" pins config to - Inputs with enabled internal pull-up resistors
 
-	PB0 - Button 
+	PB0 - Button - GND
 	PB1 - *
 	PB2	- *
 	PB3 - LED - 2,2k - GND
 	PB4 - *
 	PB5 - Reset (input)
-
 	PB6, PB7 are Read-only bits
 
 	DC Current per I/O Pin 40.0mA
