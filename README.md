@@ -1,6 +1,6 @@
-# AVR [ATtiny13] Playground
+# Microcontroller?.. It's very simple! AVR [ATtiny13] Playground
 
-- Atmel(Microchip) AVR Educational projects
+- Atmel/Microchip AVR Educational projects
 - Author: Aleksey M.
 
 <img src="./files/20220204_152630.jpg" width="500" height="500">
@@ -25,7 +25,7 @@ Even tiny 1KB memory microcontrollers (like ATtiny13) require a deep knowledge o
 
 This storage consists easily understandable files with pure notes. These step-by-step projects cover all necessary topics of microcontrollers: GPIO, Interrupts, Timers, PWM, ADC, CPU, and many more. 
 
-Quick projects for the weekend hack!
+Quick projects for the weekends hack!
 
 :v:
 

@@ -23,8 +23,9 @@ Remember about:
 1. Normal Mode
 -------------------
 Timer count up to [0 - 255]
-- A new counter value can be written anytime
-- The Output Compare Unit can be used to generate interrupts at some given time/value
+- A new counter value can be written anytime.
+- The Output Compare Unit can be used to generate interrupts at some given time/value.
+- Timer triggers interrupts.
 Advantages:
 - Time ticker
 Disadvantages:
@@ -33,8 +34,10 @@ Disadvantages:
 2. Clear Timer on Compare Match (CTC) Mode
 -------------------
 Timer count up to [0 - Compare Register] (OCR0A)
-- OCR0A defines the top value
-- In CTC mode the counter is cleared to zero when the counter value (TCNT0) matches the OCR0A
+- OCR0A defines the top value.
+- In CTC mode the counter is cleared to zero when the counter value (TCNT0) matches the OCR0A.
+- Timer trigger interrupts. Possible not to use interrupts and still toggle an output pin.
+- Parallel processing to the CPU and doesn't interrupt anything.
 Advantages:
 - Periods counting
 - Interrupt generation via defined time
@@ -46,6 +49,7 @@ Timer count up to [0 - 255]
 		if TCNT0 == OCR0A, then OC0A will toggle to "0"
 		when TCHT0 reach 255, then OC0A will toggle back to "1"
 Advantages:
+- PWM runs in the background like CTC.
 - High frequency of PWM: rectification, and DAC applications
 
 4. Phase Correct PWM Mode:
