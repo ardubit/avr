@@ -40,6 +40,6 @@ echo $PATH
 
 echo "DONE!"
 echo "Restart your terminal or run by command: source ~/.zshrc"
-echo "Or reboot your machine and test it using the terminal command avr-gcc -v OR avr-gcc --version"
+echo "Or reboot your machine and test it using the terminal command: avr-gcc -v OR avr-gcc --version"
 
 
