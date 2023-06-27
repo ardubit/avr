@@ -20,7 +20,6 @@
 
 volatile unsigned char a=0;
 
-// ���������� �� ������������ �������� �������� �������
 ISR (TIM0_OVF_vect) {
 	a++;
 	if (a==1)
