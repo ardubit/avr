@@ -39,9 +39,14 @@ Quick projects for the weekends hack!
 
 <img src="./files/ATtiny13-Pinout.svg">
 
+## 4. Licensing
+- You can learn and run code without any limitations or restrictions
+- You are not permitted to use any projects "as is" for commercial purposes, courses, articles, and similar contexts
+
 ## 4. Projects
 - 01_Blinking_LED
--
--
--
+- 02_Button
+- 02_Button_Multiply_Modes
+- 03_0_Interrupts_External_INT0
+- 03_1_Interrupts_External_PCINT
 
