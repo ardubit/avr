@@ -105,7 +105,6 @@ int main(void) {
 /*
 # Comments:
 ===================================
-
 ## What does the program do?
 MCU executes two tasks: one in the main routine and serves the button interrupt
 by FALLING and RASING edges. It increments the counter in the interrupt routine

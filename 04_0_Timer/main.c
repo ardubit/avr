@@ -1,124 +1,128 @@
 /*
- * Timer Interrupts. LED toggle in the Timer's ISR.
+ * Timer Interrupts. LED toggle in the Timer's ISR
  * Created: 24.05.2015 16:55:36
  * Author: Aleksey M.
  * MCU ATtiny13
- * Tested
+ * Tested: YES
  */
 
 #define F_CPU 1200000UL
-#include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/io.h>
 #include <util/delay.h>
 
-// #define LED1_ON PORTB = PORTB | (1 << PB3)
-// #define LED1_OFF PORTB = PORTB & ~(1 << PB3)
+#define LED1 PB3
+#define LED2 PB4
+#define RST PB5
 
-// #define LED2_ON PORTB = PORTB | (1 << PB4)
-// #define LED2_OFF PORTB = PORTB & ~(1 << PB4)
+#define LED1_ON PORTB = PORTB | (1 << LED1)
+#define LED1_OFF PORTB = PORTB & ~(1 << LED1)
+#define LED2_ON PORTB = PORTB | (1 << LED2)
+#define LED2_OFF PORTB = PORTB & ~(1 << LED2)
+#define LED1_TOG PORTB ^= (1 << LED1)
+#define LED2_TOG PORTB ^= (1 << LED2)
 
-#define LED1_TOG PORTB ^= (1 << PB3)
-// #define LED2_TOG PORTB ^= (1 << PB4)
-
-// Timer/Counter Overflow
-ISR(TIM0_OVF_vect)
-{
-	LED1_TOG;
-	_delay_ms(50); // It's only for debug. Do not use delays in the ISRs!
+// Timer/counter overflow handler
+ISR(TIM0_OVF_vect) {
+  LED1_TOG;
+  _delay_ms(50); // Only for debug. Do not use delays in the ISRs!
 }
 
-// Timer/Counter Compare Match A - OCR0A
-ISR(TIM0_COMPA_vect)
-{
-	asm("nop"); // Do nothing
+// Timer/counter Compare Match A - OCR0A
+ISR(TIM0_COMPA_vect) {
+  asm("nop"); // Do nothing
 }
 
-// Timer/Counter Compare Match B - OCR0B
-ISR(TIM0_COMPB_vect)
-{
-	asm("nop");
+// Timer/counter Compare Match B - OCR0B
+ISR(TIM0_COMPB_vect) {
+  asm("nop"); // Do nothing
 }
 
-void setup()
-{
-	/*
-	PB0, PB1, PB2 - *
-	PB3 - LED - 2,2k - GND
-	PB4 - LED - 2,2k - GND
-	PB5 - Reset (input)
-	*/
+void initIO() {
+  DDRB |= (1 << LED1) | (1 << LED2);
+  PORTB |= (1 << RST) | (1 << PB2) | (1 << PB1) | (1 << PB0);
 
-	DDRB = 0b00011000;
-	PORTB = 0b00100111;
-
-	/* 
-	Timer Setup  
-	---------------------------------------
-	Timer T0 (8-bit) counts up to (or bi-directional) = (2^8) - 1 = 255, 
-	then timer's register TCNT0 will overflow.
-	*/
-
-	/*
-	Timer/Counter Control Register A
-	---------------------------------------
-	- Timer mode: Normal port operation
-	- Waveform generation: "OFF", OC0A disconnected
-	
-	Normal Mode set by default:
-	COM0A1, COM0A0 – [0,0]
-	*/
-
-	// Normal Mode
-	TCCR0A &= ~((1 << COM0A1) | (1 << COM0A0));
-
-	// Start timer T0 with No prescaling
-	TCCR0B |= (1 << CS00);
-
-	// Timer/Counter Interrupt Mask Register. Overflow interrupt enable
-	TIMSK0 |= (1 << TOIE0);
-
-	// Compare Match A, B Interrupt
-	// Uncomment to enable
-	// TIMSK0 |= (0<<OCIE0A) | (0<<OCIE0B);
-
-	/*
-	The Timer (TCNT0) and Output Compare Registers (OCR0A and OCR0B).
-	When value in the TCNT0 == OCR0A CPU can generate compare match interrupt
-	*/
-
-	// OCR0A,B compare register values
-	// OCR0A = 100;
-	// OCR0B = 200;
-
-	// Analog comparator OFF
-	ACSR |= (1 << ACD);
-
-	// Reset timer T0 flags
-	TIFR0 = 0;
+  // Analog comparator OFF
+  ACSR |= (1 << ACD);
 }
 
-int main(void)
-{
-	// Clears the global interrupt flag in SREG to prevent any form of interrupt occurring
-	cli();
-	setup();
+void initTimer() {
+  // Normal mode
+  TCCR0A &= ~((1 << COM0A1) | (1 << COM0A0));
 
-	// Enable global interrupts
-	sei();
-	while (1)
-	{
-		asm("nop");
-	}
-	return 0;
+  // Start timer T0 with No prescaling
+  TCCR0B |= (1 << CS00);
+
+  // Timer/counter interrupt mask reg. Overflow interrupt enable
+  TIMSK0 |= (1 << TOIE0);
+
+  // Reset timer T0 flags
+  TIFR0 = 0;
+}
+
+int main(void) {
+  cli(); // Clear the global interrupt flag
+  initIO();
+  initTimer();
+  sei(); // Enable global interrupts
+
+  while (1) {
+    asm("nop");
+  }
+
+  return 0;
 }
 
 /*
-if
-asm("nop") isn't recognized by compiler
+# Comments:
+===================================
+## What does the program do?
+When timer interrupts occur, the LED toggles inside the timer's Interrupt
+Service Routine (ISR).
 
-Edit make file to:
-option -std=c99 to -std=gnu99
+Circuit connections:
+PB0 - *
+PB1 - *
+PB2 - *
+PB3 - LED - 2,2k - GND
+PB4 - LED - 2,2k - GND
+PB5 - Reset (input)
+For hardware debounce reduction add in parallel with the button 100nf
+capacitor.
 
-For c99 mode, the compiler does not recognise 'asm', '__asm' ist required instead!
-For gnu99 mode, both variants are accepted, 'asm' and '__asm' as well!
+## Notes:
+Timer Setup
+---------------------------------------
+Timer T0 (8-bit) counts up to or bi-directional 2^8 - 1 = 255 then timer's
+register TCNT0 will overflow.
+
+Timer/Counter Control Register A
+---------------------------------------
+- Timer mode: Normal port operation
+Normal Mode set by default OC0A disconnected
+COM0A1, COM0A0 – [0,0]
+- Waveform generation
+
+The Timer (TCNT0) and Output Compare Registers (OCR0A and OCR0B)
+---------------------------------------
+When value in the TCNT0 == OCR0A CPU can generate compare match interrupt
+
+// Compare Match A, B interrupt
+// Uncomment to enable
+// TIMSK0 |= (0<<OCIE0A) | (0<<OCIE0B);
+// OCR0A,B compare register values
+// OCR0A = 100;
+// OCR0B = 200;
+
+## About 'asm("nop")'
+if asm("nop") isn't recognized by compiler
+Edit make file to: option -std=c99 to -std=gnu99
+
+For c99 mode, the compiler does not recognise 'asm', '__asm' ist required
+instead! For gnu99 mode, both variants are accepted, 'asm' and '__asm' as
+well!
+
+# Conclusions
+===================================
+Run this code and find what behavior is expected and what we got.
 */
