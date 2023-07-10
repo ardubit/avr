@@ -20,7 +20,7 @@ all:
 flash:
 	@printf "\n" 
 	@printf " ===> Flashing: \n"
-	avrdude -p ${MCU} -B 4 -c usbasp -U flash:w:${TARGET}.hex:i -F -P usb
+	avrdude -p ${MCU} -B6 -c usbasp -U flash:w:${TARGET}.hex:i -F -P usb
 
 clean:
 	@printf "\n" 
