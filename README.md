@@ -1,6 +1,6 @@
 # Microcontroller?.. It's very simple! AVR [ATtiny13] Playground
 
-- Atmel/Microchip AVR Educational projects
+- Atmel (Microchip) AVR Educational projects
 - Author: Aleksey M.
 
 <img src="./files/20220204_152630.jpg" width="500" height="500">
@@ -39,14 +39,25 @@ Quick projects for the weekends hack!
 
 <img src="./files/ATtiny13-Pinout.svg">
 
-## 4. Licensing
-- You can learn and run code without any limitations or restrictions
-- You are not permitted to use any projects "as is" for commercial purposes, courses, articles, and similar contexts
-
-## 4. Projects
+## 4. [Tiny13] Projects
 - 01_Blinking_LED
 - 02_Button
 - 02_Button_Multiply_Modes
 - 03_0_Interrupts_External_INT0
 - 03_1_Interrupts_External_PCINT
+- 04_0_Timer
+- 04_1_Software_Timers
+- 04_2_Software_Timers_LED_Blink_Duty_Ratio
+- 05_0_Timer_Fast_PWM
+- 05_1_LED_Fade_In_Out
+- 05_2_Timer_CTC
+- 
+- 06_0_ADC
+- 06_1_ADC_To_PWM
 
+## 5. [Tiny24] Projects
+- 01_Blink_LED
+
+## Licensing
+- You can learn and run code without any limitations or restrictions
+- You are not permitted to use any projects "as is" for commercial purposes, courses, articles, and similar contexts

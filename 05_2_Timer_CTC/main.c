@@ -83,7 +83,7 @@ int main(void) {
 # Comments:
 ===================================
 ## What does the program do?
-Generate a PWM output while blinking an LED.
+CTC Clear Timer on Compare Match (CTC) Mode. Generate a PWM output while blinking an LED.
 
 Circuit connections:
 PB0 - *

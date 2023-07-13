@@ -94,9 +94,27 @@ PB4 - *
 PB5 - Reset (input)
 
 ## Notes:
-Reading ADC value
----------------------------------------
+-----------------------------------
+1. How does ADC work?
+if right -> 1, left -> 0
+GND 0  ----------|----------  VCC              BIT '1'  MSB
+               || measured analog value
 
+then "divide and conquer"
+GND 0  ----------|-----|----- VCC              BIT '0'
+               || measured analog value
+
+then "divide and conquer"
+GND 0  ----------|---|---|---- VCC             BIT '0'
+               || measured analog value
+
+to the end                                     BIT 'X'  LSB
+
+Formulas:
+a. 1024 / VCC
+b. ADC / 1034 / VCCC
+
+2. Reading ADC value
 ADLAR = 0, Right Adjustement, page 93
 ADCH                        | ADCL
 H  .  .  .  .  .  .    .    |    .    .    .    .    .    .    . L  .
