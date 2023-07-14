@@ -96,6 +96,22 @@ Timer Setup
 Timer T0 (8-bit) counts up to or bi-directional 2^8 - 1 = 255 then timer's
 register TCNT0 will overflow.
 
+  TCNT0 0-255
+    overflow at TOP
+       /|    /|
+      / |   / |
+OCR0 x  |  x  | <--- MCU compare TCNT0 with OCR0 value and then generate ISR
+    /   | /   |
+   /    |/    |
+
+  TCNT0 0-255-0
+    overflow
+       /\
+      /  \
+OCR0 x    x
+    /      \
+   /        \
+
 Timer/Counter Control Register A
 ---------------------------------------
 - Timer mode: Normal port operation

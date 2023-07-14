@@ -74,6 +74,19 @@ For hardware debounce reduction add in parallel with the button 100nf
 capacitor.
 
 ## Notes:
+---------------------------------------
+  TCNT0 0-255
+    overflow at TOP
+       /|    /|
+      / |   / |
+OCR0 x  |  x  | <--- MCU compare TCNT0 with OCR0 value and then Toggle OC0A pin
+    /   | /   |
+   /    |/    |
+   
+     |  |  |  |
+_____    __    _ OC0A pin
+     |__|  |__|  PWM Generation waveform
+
 Timer Setup
 ---------------------------------------
 - Timer T0 (8-bit) counts up to or bi-directional 2^8 - 1 = 255 then timer's
